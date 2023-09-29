@@ -10,15 +10,19 @@ const mime = {
   'mp4': 'video/mp4'
 }
 
+const PORT = process.env.PORT || 8888
+
 const servidor = http.createServer((pedido, respuesta) => {
-  const url = new URL('https://evaluacionsep-566cd.web.app/' + pedido.url)
+  const url = new URL('http://localhost:' + PORT + pedido.url)
   let camino = 'public' + url.pathname
   if (camino == 'public/')
     camino = 'public/index.html'
   encaminar(pedido, respuesta, camino)
 })
 
-servidor.listen('evaluacionsep-566cd.web.app/')
+servidor.listen(PORT, () =>{
+  console.log(`hola ${PORT}`)
+})
 
 
 function encaminar(pedido, respuesta, camino) {
